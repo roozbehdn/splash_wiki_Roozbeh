@@ -14,6 +14,6 @@ cd example
 splash input.txt #run the pipeline with default parameters on test data
 ```
 
-If pipeline finishes successfully, you should see the following two TSV files:
+If pipeline finishes successfully, you should see the following two TSV files in your run directory:
  1. `result.after_correction.all_anchors.tsv`  #output file containing all anchors found by the pipeline 
  2. `result.after_correction.scores.tsv`  #output file containing significant anchors
