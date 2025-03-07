@@ -6,13 +6,14 @@ curl -L https://github.com/refresh-bio/SPLASH/releases/download/v2.6.1/splash-2.
 
 Then, one can perform an example analysis on the data from viral RNA sequencing. The data consists of four Illumina NovaSeq 6000 runs from the study entitled "Detection and prevalence of SARS-CoV-2 co-infections during the Omicron variant circulation": 
 ```
+gunzip splash-2.6.1.linux.x64.tar.gz
+tar -xf splash-2.6.1.linux.x64.tar
+cd splash-2.6.1.linux.x64
 cd example
-./download.py #download examplary data
-splash input.txt #run the pipeline with default parameters
+./download.py #download test data
+splash input.txt #run the pipeline with default parameters on test data
 ```
 
-The result consists of two TSV files, namely,
- 1. `result.after_correction.all_anchors.tsv` 
- 2. `result.after_correction.scores.tsv`
-The first file contain all unfiltered anchors found by the pipeline.
-The second file contains only anchors whose corrected p-value is below 0.05.
+If pipeline finishes successfully, you should see the following two TSV files:
+ 1. `result.after_correction.all_anchors.tsv`  #output file containing all anchors found by the pipeline 
+ 2. `result.after_correction.scores.tsv`  #output file containing significant anchors
