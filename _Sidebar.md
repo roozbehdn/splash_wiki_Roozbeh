@@ -20,7 +20,11 @@
 	2. [Understanding the output](./Input-and-output#Understanding-the-output)
 	3. [Additional output](./Input-and-output#Additional-output)
 5. [sc-SPLASH: barcoded scRNA-Seq and Spatial applications](./sc-SPLASH)
-	1. [Installation](./Compactors#installation)
+	1. [Installation](./sc-splash#installation)
+ 	2. [Input format](./sc-splash#input-format)
+  	3. [Quick start](./sc-splash#quick-start)
+   	4. [Parameters](./sc-splash#parameters)
+   	6. [BKC](./sc-splash#barcoded-reads-k-mer-counter-bkc) 		
 	
 7. [Compactors](./Compactors)
 	1. [Installation](./Compactors#installation)
