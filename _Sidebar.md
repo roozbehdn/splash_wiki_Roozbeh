@@ -14,7 +14,7 @@
 	3. [Additional output configuration](./Configuration#Additional-output-configurations)
 	4. [Tuning statistics computation](./Configuration#Tuning-statistics-computation)
 	5. [Technical and performance-related](./Configuration#Technical-and-performance-related)
-	6. [10x or visium processing](./Configuration#10x-or-visium-processing)
+	6. [sc-SPLASH (10x or visium processing)](./Configuration#10x-or-visium-processing)
 4. [Input and output](./Input-and-output)
 	1. [Input format](./Input-and-output#input-format)
 	2. [Understanding the output](./Input-and-output#Understanding-the-output)
