@@ -23,5 +23,4 @@ splash --technology 10x --cbc_len 16 --umi_len 12 --soft_cbc_umi_len_limit 0 inp
 BKC is a new optimized tool developed for sc-SPLASH for preprocessing and k-mer counting in barcoded data. Like other 10x preprocessing tools such as UMI-tools (Smith, Heger, and Sudbery 2017), BKC first extracts “trusted” cell barcodes and performs UMI deduplication. Additionally, BKC can separately parse reads assigned to each extracted cell to obtain counts for either k-mers or paired k-mers (e.g., anchor-target pairs in the context of SPLASH). BKC also includes a rapid step to filter sequencing artifacts due to Illumina adapters or other user-provided contaminants utilizing custom implementation of hash-tables and Bloom filter. We also provide BKC as a standalone tool, as we anticipate it could be valuable for developing other pipelines: https://github.com/refresh-bio/bkc 
 
 ## Parameters
-The parameters that are specific for analysis by sc-SPLASH are described here 
-A short help is printed after running the executable without arguments. 
+The parameters that are specific for analysis by sc-SPLASH are described in [Configuration section](./Configuration#10x-or-visium-processing)
