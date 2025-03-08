@@ -73,7 +73,7 @@ per line
  * `--dont_clean_up` — if set then intermediate files will not be removed (default: False)
  * `--logs_dir` — director where run logs of each thread will be stored (default: logs)
 
-## 10x or visium processing
+## sc-SPLASH parameters (10x or Visium processing)  
  * `--cbc_len` — call barcode length (in case of 10X/Visium data) (default: 16)
  * `--umi_len` — UMI length (in case of 10X/Visium data) (default: 12)
  * `--soft_cbc_umi_len_limit` — allow additional symbols (beyond cbc_len + umi_len in _1.fastq 10X file UMI (default: 0)
