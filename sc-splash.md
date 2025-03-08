@@ -1,26 +1,26 @@
-Compactors is a new statistical approach to local seed-based assembly. It comes as a part of SPLASH package and was particularly suited to assemble regions divere across across samples (see figure below). However, it can be used as an independent assembler on any types of seeds provided by the user.
+sc-SPLASH is an ultra-efficient easy-to-use pipeline for analyzing transcriptomic complexity in barcoded scRNA-seq (and also barcoded spatial data such as Visium), as an alternative to reference-based, gene expression-centric approaches. 
 
 
-![compactors-idea-v2](https://github.com/user-attachments/assets/5f45d83b-ee49-4611-8d24-77ed4cfb3ab6)
+![image](https://github.com/user-attachments/assets/30bb826a-7f4c-4327-b0fe-07163027be20)
 
 
 ## Installation
-The software is distributed as a part of SPLASH package as a separate binary named `compactors`. Please follow SPLASH [installation instructions](../Installation) in order to install compactors.
+sc-SPLASH is integrated into the SPLASH2 pipeline and can be invoked by setting the input parameter `technology = 10x` for 10x scRNA-Seq analysis or `technology = visium` for Visium spatial analysis.
 
+## Input format
+The input file for sc-SPLASH needs to define the set of fastq files for each 10x library (as each 10x library might be sequenced across multiple sequencing lanes). UMI deduplication and barcode filtering is performed within the fastq files assigned to each 10x library. Each line in the input file defines a 10x library, where the first column determines the name of the library and the second column gives the path to a text file containing the paths to fastq files for the library. We provide an example input file [input-10X.txt](https://github.com/refresh-bio/SPLASH/blob/master/example/input-10X.txt), which defines four 10x libraries: `S10`, `S11`, `S12`, and `S13`. Each line in the text file for each library (second column of input file) gives the paths to one pair of R1 (for UMI and barcode) and R2 (for cDNA sequence) fastq files separated by a comma. For example, file `S10.txt` has four lines and each line gives the path to the R1 and R2 fastq files from one sequencing lane.
 
-## Toy examples
+## Quick start
+We provide example 10x analysis with sc-SPLASH on the test data from Tabula Sapiens Project. The data consists of four 10x libraries (as defined in files `S10.txt`, `S11.txt`, `S12.txt`, and `S13.txt`. Illumina NovaSeq 6000 runs from the study entitled "Detection and prevalence of SARS-CoV-2 co-infections during the Omicron variant circulation": 
+```
+cd splash-2.6.1.linux.x64
+cd example
+./download_10X.py #download test data
+splash --technology 10x --cbc_len 16 --umi_len 12 --soft_cbc_umi_len_limit 0 input-10X.txt
+```
 
-### Short reads 
-Generate compactorts from samples listed in `fastq.list` seeded at anchors contained in `anchors.tsv` and store them in `compactors.tsv`. Compactors are extended by segments consisting of 2 \* 27 (`num_kmers` \* `kmer_len`) nucleotides. Assuming the anchors are 27 nucleotides long as well, this configuration is suitable for short reads of at least 81 bases. The maximum compactor length is by default set to 2000 bases.
-```
-compactors fastq.list anchors.tsv compactors.tsv
-```
-
-### Increased sensitivity
-In the following example, several parameters increasing compactors's sensitivity at the cost of higher false positive rate has been altered.
-```
-compactors fastq.list anchors.tsv compactors.tsv --epsilon 0.01 --beta 1 --lower_bound 2
-```
+## Barcoded-reads K-mer Counter (BKC)
+BKC is a new optimized tool developed for sc-SPLASH for preprocessing and k-mer counting in barcoded data. Like other 10x preprocessing tools such as UMI-tools (Smith, Heger, and Sudbery 2017), BKC first extracts “trusted” cell barcodes and performs UMI deduplication. Additionally, BKC can separately parse reads assigned to each extracted cell to obtain counts for either k-mers or paired k-mers (e.g., anchor-target pairs in the context of SPLASH). BKC also includes a rapid step to filter sequencing artifacts due to Illumina adapters or other user-provided contaminants utilizing custom implementation of hash-tables and Bloom filter. We also provide BKC as a standalone tool, as we anticipate it could be valuable for developing other pipelines: https://github.com/refresh-bio/bkc 
 
 ### More extensions
 The stringency of compactors' extension can be loosened by decreasing specificity requirement `--min_extender_specificity`. Additionally, the algorithm by default considers only the last k-mer as a potential extender. However, k-mers preceding it can be also considered by redefining `--num_extenders` and `--extenders_shift` parameters at the cost of increased computational time. The procedure operates from the end of a compactor and stops at the first extender fulfilling the requirement. In the following example, the 27-mers at shifts 0, 5, and 10 nucleotides from the current compactors' end are checked for the specificity criterion (which has been also loosened slightly).
